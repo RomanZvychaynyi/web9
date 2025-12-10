@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Навчальний файл HTML</title>
+    <link rel="icon" href="../websites/logos/mount.jpeg">
+</head>
+<body>
+<div class = "main">
+
+    <div class = "row textStayl">
+        <div class = "text user">
+            User
+        </div>
+        <div class = "score">
+            0
+        </div>
+        <div class = "card" >
+            <canvas id="myCanvas" width="200" height="300"></canvas>
+        </div>
+    </div>
+    <div class = "row textStayl rowbutton">
+        <div class = "button">
+            Generate
+        </div>
+    </div>
+    <div class = "row textStayl">
+        <div class = "text">
+            Computer
+        </div>
+        <div class = "score">
+            0
+        </div>
+        <div class = "card" >
+            <canvas id="myCanvas2" width="200" height="300"></canvas>
+        </div>
+    </div>
+</div>
+<style>
+    @media (max-width: 480px) and (orientation: portrait) {}    
+@media (min-width: 660px) {
+    .main {
+        margin-top: 10%;
+        padding-top: 4%;
+        width: 900px;
+        height: 400px;
+    }
+    .row{
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 200px;
+        height: 300px;
+    }
+    .score{
+        margin-top: 2%;
+        width: 200px;
+        height: 80px;
+        padding-top: 6%;
+        box-sizing: border-box;
+        font-size: xx-large;
+    }
+    .card{
+        margin-top: 3%;
+        width: 200px;
+        height: 300px;
+        
+    }
+    .button{
+        
+        margin-top: 45%;
+        width: 200px;
+        height: 50px;
+        padding-top: 3%;
+        
+    }
+    .text{
+        
+        margin-top: 1%;
+        width: 200px;
+        height: 50px;
+        padding-top: 3%;
+    }}
+@media (min-width: 860px){
+    .main{
+        margin-top: 10%;
+        padding-top: 4%;
+        width: 900px;
+        height: 400px;
+    }
+    .row{
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 300px;
+        height: 300px;
+    }
+    .score{
+        margin-left: 10%;
+        margin-top: 2%;
+        width: 200px;
+        height: 80px;
+        padding-top: 6%;
+        box-sizing: border-box;
+        font-size: xx-large;
+    }
+    .card{
+        margin-top: 3%;
+        width: 200px;
+        height: 300px;
+    }
+    .button{
+        margin-left: 10%;
+        margin-top: 45%;
+        width: 200px;
+        height: 50px;
+        padding-top: 3%;
+    }
+    .text{
+        margin-left: 10%;
+        margin-top: 1%;
+        width: 200px;
+        height: 50px;
+        padding-top: 3%;
+    }}
+html  {
+    height: 100%;
+    margin: 0;
+}
+body{
+display: flex;
+justify-content: center;
+background-image: url(../websites/logos/images.jpeg);
+background-size: cover; 
+background-position: center; 
+background-repeat: no-repeat; 
+height: 100%;       
+}
+.main{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+.score{
+    background-color: rgb(224, 127, 7);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: solid;
+    border-color: black;
+    padding-top: 6%;
+}
+.card{
+    display: inline-block;
+}
+.button{
+    background-color: rgb(23, 183, 231);
+    border: solid;
+    border-color: black;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+.text{
+    background-color: rgb(23, 183, 231);
+    border: solid;
+    border-color: black;
+    box-sizing: border-box;
+}
+.textStayl{
+    font-family: Arial;
+    text-align: center;
+    font-size: x-large; 
+}
+
+</style>
+<script>
+    const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+  const canvas2 = document.getElementById('myCanvas2');
+  const ctx2 = canvas2.getContext('2d');
+  let game = 0;
+  let winerF;
+  let winerT;
+  let userScore = 0;
+  let computerScore = 0;
+  let random;
+  const image = new Image();
+  image.src = "D:/University/Frontend%20development/9/img/Cards1.png";
+  const image1 = new Image();
+  image1.src = "D:/University/Frontend%20development/9/img/CardsIntro.jpg";
+  image.onload = () => {
+    ctx.drawImage(image1, 1360, 226, 2268, 2835, 0, 0, 195, 295);
+    ctx2.drawImage(image1, 1360, 226, 2268, 2835, 0, 0, 195, 295);
+  };
+  image.onerror = () => {
+    console.error("Failed to load the image. Check the file path.");
+  };
+  const userNameElem = document.querySelectorAll(".text")[0];
+  let userName = prompt("Введіть ім'я");
+  userNameElem.textContent = userName ? userName : userName = "User";
+  const userScoreElem = document.querySelectorAll(".score")[0];
+  const computerScoreElem = document.querySelectorAll(".score")[1];
+function getRandomNumber12() {
+   random = Math.floor(Math.random() * 13);
+};
+ function getRandomNumber4() {
+  return Math.floor(Math.random() * 4);
+};
+function WinerValue(i) {
+  if (i === 1){
+    if(random === 0){
+    winerF = 14;
+  }else{
+    winerF = random+1;
+  }
+  userScore += winerF;
+}else{
+  if(random === 0){
+    winerT = 14;
+  }else{
+    winerT = random+1;
+  }
+  computerScore += winerT;
+  game = game+1;
+}};
+  document.addEventListener("DOMContentLoaded",function () {
+    const generateButton = document.querySelectorAll(".button")[0];
+    const generateButton2 = document.querySelectorAll(".button")[1];
+    function updateGame() {
+      ctx.clearRect(0, 0, 195, 295);
+      ctx2.clearRect(0, 0, 195, 295);
+      getRandomNumber12();
+      ctx.drawImage(image, (88 + 1147 * random), (88 + 1676 * getRandomNumber4()), 1059, 1588, 0, 0, 195, 295);
+      WinerValue(1);
+      userScoreElem.textContent = userScore;
+      getRandomNumber12();
+       ctx2.drawImage(image, (88 + 1147 * random), (88 + 1676 * getRandomNumber4()), 1059, 1588, 0, 0, 195, 295);
+       WinerValue(2);
+      computerScoreElem.textContent = computerScore;
+      if(game === 3){
+        setTimeout(function() {
+          if (winerF > winerT) {
+              alert(userName + " переміг!");
+          } else {
+              alert("Комп'ютер переміг!");
+          }
+          resetGame(); 
+      }, 300);}
+  }
+  function resetGame() {
+    game = 0;
+    userName = prompt("Введіть ім'я");
+    userNameElem.textContent = userName ? userName : userName = "User";
+    userScore = 0;
+    computerScore = 0;
+    userScoreElem.textContent = userScore;
+    computerScoreElem.textContent = computerScore;
+    ctx.drawImage(image1, 1360, 226, 2268, 2835, 0, 0, 195, 295);
+    ctx2.drawImage(image1, 1360, 226, 2268, 2835, 0, 0, 195, 295);
+  }
+    generateButton.addEventListener("click", updateGame);
+});
+
+</script>
+</body>
+</html>
