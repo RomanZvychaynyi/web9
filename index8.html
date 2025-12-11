@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Навчальний файл HTML</title>
+    <link rel="stylesheet" href="../websites/work_8.css">
+    <script src="../websites/work_8.js" defer></script>
+</head>
+<body>
+<div class = "main">
+    <div class = "row textStayl">
+        <div class = "text">
+            User
+        </div>
+        <div class = "score">
+            0
+        </div>
+        <div class = "number">
+            -
+        </div>
+    </div>
+    <div class = "row textStayl">
+        <div class = "button">
+            Generate
+        </div>
+    </div>
+    <div class = "row textStayl">
+        <div class = "text">
+            Computer
+        </div>
+        <div class = "score">
+            0
+        </div>
+        <div class = "number ">
+            -
+        </div>
+    </div>
+</div>
+<style> html  {
+    height: 100%;
+    margin: 0; }
+body{
+display: flex;
+justify-content: center;
+background-image: url(../websites/logos/mount.jpeg);
+background-size: cover; 
+background-position: center; 
+background-repeat: no-repeat; 
+height: 100%;       }
+.main{
+    margin-top: 10%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding-top: 4%;
+    width: 900px;
+    height: 400px;}
+.row{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 300px;
+    height: 300px; }
+.score{
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 200px;
+    height: 80px;
+    background-color: rgb(224, 127, 7);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: solid;
+    border-color: black;
+    padding-top: 6%;
+    box-sizing: border-box;
+    font-size: xx-large; }
+.number{
+    margin-left: 18%;
+    margin-top: 2%;
+    width: 150px;
+    height: 130px;
+    background-color: rgb(138, 233, 15);
+    border: solid;
+    border-color: black;
+    border-radius: 50%;
+    padding-top: 15%;
+    box-sizing: border-box;
+    font-size: xx-large;    }
+.button{
+    margin-left: 10%;
+    margin-top: 45%;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(23, 183, 231);
+    border: solid;
+    border-color: black;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding-top: 3%;
+    box-sizing: border-box; }
+.text{
+    margin-left: 10%;
+    margin-top: 1%;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(23, 183, 231);
+    border: solid;
+    border-color: black;
+    padding-top: 3%;
+    box-sizing: border-box; }
+.textStayl{
+    font-family: Arial;
+    text-align: center;
+    font-size: x-large;  }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded",
+    function () {
+    const userScoreElem = document.querySelectorAll(".score")[0];
+    const computerScoreElem = document.querySelectorAll(".score")[1];
+    const userNumberElem = document.querySelectorAll(".number")[0];
+    const computerNumberElem = document.querySelectorAll(".number")[1];
+    const userNameElem = document.querySelectorAll(".text")[0];
+    const generateButton = document.querySelector(".button");
+    let userScore = 0;
+    let computerScore = 0;
+    let userName = prompt("Введіть ім'я");
+    userNameElem.textContent = userName ? userName : userName = "User";
+    function getRandomNumber() {
+        return Math.floor(Math.random() * 10) + 1;
+    }
+    function updateGame() {
+        const userNumber = getRandomNumber();
+        const computerNumber = getRandomNumber();
+        userNumberElem.textContent = userNumber;
+        computerNumberElem.textContent = computerNumber;
+
+        if (userNumber > computerNumber) {
+            userScore++;
+        } else if (computerNumber > userNumber) {
+            computerScore++;
+        }
+        userScoreElem.textContent = userScore;
+        computerScoreElem.textContent = computerScore;
+
+        if (userScore === 3) {
+            alert(userName +" переміг!");
+            resetGame();
+        } else if (computerScore === 3) {
+            alert("Комп'ютер переміг!");
+            resetGame();
+        }
+    }
+    function resetGame() {
+        userName = prompt("Введіть ім'я");
+        userNameElem.textContent = userName ? userName : userName = "User";
+        userScore = 0;
+        computerScore = 0;
+        userScoreElem.textContent = userScore;
+        computerScoreElem.textContent = computerScore;
+        userNumberElem.textContent = "-";
+        computerNumberElem.textContent = "-";
+    }
+    generateButton.addEventListener("click", updateGame);
+});
+
+</script>
+</body>
+</html>
